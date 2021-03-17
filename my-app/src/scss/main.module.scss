@@ -33,7 +33,7 @@ input {
    background: #1d4354;
    display: flex;
    position: relative;
-   padding: 25px;
+   padding: 20px;
    z-index: 3;
 
    .search {
@@ -59,6 +59,29 @@ input {
       color: white;
       margin-right: 20px;
       margin: auto;
+      position: relative;
+      img {
+         position: absolute;
+         left: 0;
+         top: -80px;
+         transform: translate(-50%);
+         width: 150px;
+      }
+   }
+
+   .li {
+      color: rgba(255, 255, 255, 0.87);
+      margin-left: 15px;
+      cursor: pointer;
+   }
+   .profileIcon {
+      background: url(https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png);
+      background-size: cover;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      margin-top: -10px;
    }
 }
 .navbar {

@@ -3,7 +3,12 @@ import css from "./scss/main.module.scss";
 import Navbar from "./components/widgets/Navbar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+   faSearch,
+   faBell,
+   faEnvelope,
+   faQuestion,
+} from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
    state = {
@@ -20,7 +25,21 @@ class App extends Component {
                   </span>
                   <input type="text" placeholder="მოძიება" />
                </div>
-               <span className={css.logo}>Antlabor</span>
+               <span className={css.logo}>
+                  <img src="logo.png" />
+               </span>
+               <span className={css.li}>
+                  <FontAwesomeIcon icon={faQuestion} />
+               </span>
+               <span className={css.li}>
+                  <FontAwesomeIcon icon={faBell} />
+               </span>
+               <span className={css.li}>
+                  <FontAwesomeIcon icon={faEnvelope} />
+               </span>
+               <span className={css.li}>
+                  <span className={css.profileIcon}></span>
+               </span>
             </div>
             <div className={css.mainFlex}>
                <Navbar
