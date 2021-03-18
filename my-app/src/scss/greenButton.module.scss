@@ -17,4 +17,10 @@
       transition: all 0.15s ease;
       background: rgb(72, 172, 142);
    }
+
+   &:disabled {
+      cursor: default;
+      background: gray;
+      border: gray;
+   }
 }

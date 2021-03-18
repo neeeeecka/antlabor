@@ -52,6 +52,28 @@ function App() {
    const [jobDescription, setJobDescription] = useState("");
    const [jobPay, setJobPay] = useState(0.01);
 
+   const [isFetching, setFetching] = useState(false);
+
+   const addJob = async (e) => {
+      setFetching(true);
+      const { uid } = auth.currentUser;
+      await jobsRef.add({
+         location: "Georgia",
+         title: jobTitle,
+         description: jobDescription,
+         pay: jobPay,
+         user: uid,
+         createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+      });
+
+      setJobTitle("");
+      setJobDescription("");
+      setJobPay(0.01);
+
+      setVisible(false);
+      setFetching(false);
+   };
+
    return user ? (
       <div className={css.main}>
          <Modal visible={visible} onClick={() => setVisible(false)}>
@@ -60,16 +82,29 @@ function App() {
                   title="სათაური"
                   onChange={setJobTitle}
                   value={jobTitle}
+                  disabled={isFetching}
                />
                <ModalRow
                   title="აღწერა"
                   onChange={setJobDescription}
                   value={jobDescription}
                   multiRow
+                  disabled={isFetching}
                />
-               <ModalRow title="ხელფასი" onChange={setJobPay} value={jobPay} />
+               <ModalRow
+                  title="ხელფასი"
+                  onChange={setJobPay}
+                  value={jobPay}
+                  disabled={isFetching}
+               />
 
-               <button className={greenButtoncss.button}>დამატება</button>
+               <button
+                  className={greenButtoncss.button}
+                  onClick={addJob}
+                  disabled={isFetching}
+               >
+                  დამატება
+               </button>
             </div>
          </Modal>
          <div className={css.topbar}>
@@ -111,7 +146,9 @@ function App() {
                </div>
                <div>
                   {jobs &&
-                     jobs.map((job) => <JobPost key={job.id} job={job} />)}
+                     jobs
+                        .reverse()
+                        .map((job) => <JobPost key={job.id} job={job} />)}
                </div>
             </div>
          </div>
@@ -159,7 +196,7 @@ function JobPost(props) {
    );
 }
 function ModalRow(props) {
-   const { title, onChange, value, multiRow } = props;
+   const { title, onChange, value, multiRow, disabled } = props;
    return (
       <div className={css.modalRow}>
          {multiRow
@@ -169,6 +206,7 @@ function ModalRow(props) {
                     onChange={(e) => onChange(e.target.value)}
                     value={value}
                     placeholder={`ჩაწერეთ ${title} აქ...`}
+                    disabled={disabled}
                  ></textarea>,
               ]
             : [
@@ -178,6 +216,7 @@ function ModalRow(props) {
                     onChange={(e) => onChange(e.target.value)}
                     value={value}
                     placeholder={`ჩაწერეთ ${title} აქ...`}
+                    disabled={disabled}
                  />,
               ]}
       </div>

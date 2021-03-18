@@ -36,7 +36,8 @@ input {
       }
    }
    > div:last-child {
-      overflow: hidden;
+      max-height: calc(100vh - 200px);
+      overflow: auto;
       flex: 1;
       background: white;
       border-radius: 10px;
@@ -193,6 +194,10 @@ input {
          width: calc(100% - 20px);
          border: 2px solid #bb639e;
          padding: 7px;
+         &:disabled {
+            border: gray;
+            cursor: default;
+         }
       }
       textarea {
          height: 120px;
