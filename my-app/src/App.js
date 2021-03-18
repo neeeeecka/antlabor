@@ -217,7 +217,7 @@ function JobPost(props) {
             </span>
          </div>
          <div className={jobPostcss.pay}>
-            <span>Hourly: ₾{pay}</span> - beginner. 1 - 3 days
+            <span>საათობრივად: ₾{pay}</span> - beginner. 1 - 3 days
          </div>
          <div className={jobPostcss.description}>{description}</div>
          <div className={jobPostcss.bottom}>
@@ -234,8 +234,9 @@ function ModalRow(props) {
       <div className={css.modalRow}>
          {multiRow
             ? [
-                 <div>{title}:</div>,
+                 <div key={0}>{title}:</div>,
                  <textarea
+                    key={1}
                     onChange={(e) => onChange(e.target.value)}
                     value={value}
                     placeholder={`ჩაწერეთ ${title} აქ...`}
@@ -243,8 +244,9 @@ function ModalRow(props) {
                  ></textarea>,
               ]
             : [
-                 <span>{title}:</span>,
+                 <span key={0}>{title}:</span>,
                  <input
+                    key={1}
                     type="text"
                     onChange={(e) => onChange(e.target.value)}
                     value={value}
