@@ -22,26 +22,39 @@ input {
    }
 }
 .side {
-   overflow: hidden;
-   z-index: 1;
-   position: relative;
    flex: 1;
-   background: white;
-   border-radius: 10px;
-   border: 1px solid #c6c6c6;
-   overflow: auto;
+   position: relative;
+   display: flex;
+   flex-direction: column;
+
+   > div:first-child {
+      width: 100%;
+      display: flex;
+      padding: 10px;
+      button {
+         margin: auto;
+      }
+   }
+   > div:last-child {
+      overflow: hidden;
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #c6c6c6;
+      overflow: auto;
+   }
 }
 .topbar {
    background: #1d4354;
    display: flex;
    position: relative;
    padding: 25px;
-   z-index: 3;
    margin: 5px;
 
    border-radius: 10px;
 
    .search {
+      line-height: 19px;
       background: #2b5468;
       color: rgba(255, 255, 255, 0.87);
       padding: 10px;
@@ -98,7 +111,6 @@ input {
    //    color: white;
    position: relative;
    width: 250px;
-   z-index: 2;
    //    box-shadow: 4px 12px 13px -1px rgba(0, 0, 0, 0.685);
    overflow: hidden;
    font-size: 15px;

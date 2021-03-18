@@ -1,0 +1,20 @@
+.button {
+   cursor: pointer;
+
+   transition: all 0.15s ease;
+   background: rgb(55, 199, 156);
+   border: 2px solid rgb(55, 199, 156);
+   color: white;
+   padding: 8px;
+   font-size: 12px;
+   font-weight: bold;
+   border-radius: 4px;
+   &:hover {
+      transition: all 0.15s ease;
+      background: rgb(103, 206, 175);
+   }
+   &:active {
+      transition: all 0.15s ease;
+      background: rgb(72, 172, 142);
+   }
+}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import css from "./scss/main.module.scss";
 import jobPostcss from "./scss/jobPost.module.scss";
+import greenButtoncss from "./scss/greenButton.module.scss";
+import Modal from "./components/widgets/modal";
 
 import Navbar from "./components/widgets/Navbar";
 // import SignIn from "./SignIn";
@@ -42,8 +44,14 @@ function App() {
    const query = jobsRef.orderBy("createdAt").limit(25);
 
    const [jobs] = useCollectionData(query, { idField: "id" });
+
+   const [visible, setVisible] = useState(false);
+
    return user ? (
       <div className={css.main}>
+         <Modal visible={visible} onClick={() => setVisible(false)}>
+            <button>TEST</button>
+         </Modal>
          <div className={css.topbar}>
             <div className={css.search}>
                <span>
@@ -73,7 +81,18 @@ function App() {
          <div className={css.mainFlex}>
             <Navbar selectedTab={selectedTab} onSelect={setTab} />
             <div className={css.side}>
-               {jobs && jobs.map((job) => <JobPost key={job.id} job={job} />)}
+               <div>
+                  <button
+                     className={greenButtoncss.button}
+                     onClick={() => setVisible(true)}
+                  >
+                     სამუშაოს შექმნა
+                  </button>
+               </div>
+               <div>
+                  {jobs &&
+                     jobs.map((job) => <JobPost key={job.id} job={job} />)}
+               </div>
             </div>
          </div>
       </div>
@@ -112,7 +131,9 @@ function JobPost(props) {
          </div>
          <div className={jobPostcss.description}>{description}</div>
          <div className={jobPostcss.bottom}>
-            <button>სერვისის შეთავაზება</button>
+            <button className={greenButtoncss.button}>
+               სერვისის შეთავაზება
+            </button>
          </div>
       </div>
    );

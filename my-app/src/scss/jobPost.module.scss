@@ -1,6 +1,5 @@
 .jobPost {
    padding: 20px;
-   cursor: pointer;
    &:hover {
       background: rgb(248, 248, 248);
    }
@@ -23,23 +22,6 @@
    }
    .bottom {
       margin-top: 15px;
-      button {
-         transition: all 0.15s ease;
-         background: rgb(55, 199, 156);
-         border: 2px solid rgb(55, 199, 156);
-         color: white;
-         padding: 8px;
-         font-size: 12px;
-         font-weight: bold;
-         &:hover {
-            transition: all 0.15s ease;
-            background: rgb(103, 206, 175);
-         }
-         &:active {
-            transition: all 0.15s ease;
-            background: rgb(72, 172, 142);
-         }
-      }
    }
    border-bottom: 1px solid rgb(197, 197, 197);
 }
