@@ -172,3 +172,30 @@ input {
       }
    }
 }
+.inModal {
+   padding: 10px;
+   .modalRow {
+      margin-bottom: 10px;
+      span,
+      > div {
+         font-size: 13px;
+
+         width: 100px;
+         display: inline-block;
+         margin-bottom: 10px;
+      }
+      input,
+      textarea {
+         font-size: 13px;
+         resize: none;
+         outline: none;
+         // background: rgb(226, 226, 226);
+         width: calc(100% - 20px);
+         border: 2px solid #bb639e;
+         padding: 7px;
+      }
+      textarea {
+         height: 120px;
+      }
+   }
+}

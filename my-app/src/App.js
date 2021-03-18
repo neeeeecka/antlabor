@@ -22,16 +22,17 @@ import "firebase/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-
-firebase.initializeApp({
-   apiKey: "AIzaSyBVQzqpkCJNFUeyah0q60JCESyfr_4kvcs",
-   authDomain: "antlabor-2b524.firebaseapp.com",
-   projectId: "antlabor-2b524",
-   storageBucket: "antlabor-2b524.appspot.com",
-   messagingSenderId: "665687381453",
-   appId: "1:665687381453:web:37ae94b9e8ae89bbe62084",
-   measurementId: "G-X07R2J9H2H",
-});
+if (!firebase.apps.length) {
+   firebase.initializeApp({
+      apiKey: "AIzaSyBVQzqpkCJNFUeyah0q60JCESyfr_4kvcs",
+      authDomain: "antlabor-2b524.firebaseapp.com",
+      projectId: "antlabor-2b524",
+      storageBucket: "antlabor-2b524.appspot.com",
+      messagingSenderId: "665687381453",
+      appId: "1:665687381453:web:37ae94b9e8ae89bbe62084",
+      measurementId: "G-X07R2J9H2H",
+   });
+}
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
@@ -47,10 +48,29 @@ function App() {
 
    const [visible, setVisible] = useState(false);
 
+   const [jobTitle, setJobTitle] = useState("");
+   const [jobDescription, setJobDescription] = useState("");
+   const [jobPay, setJobPay] = useState(0.01);
+
    return user ? (
       <div className={css.main}>
          <Modal visible={visible} onClick={() => setVisible(false)}>
-            <button>TEST</button>
+            <div className={css.inModal}>
+               <ModalRow
+                  title="სათაური"
+                  onChange={setJobTitle}
+                  value={jobTitle}
+               />
+               <ModalRow
+                  title="აღწერა"
+                  onChange={setJobDescription}
+                  value={jobDescription}
+                  multiRow
+               />
+               <ModalRow title="ხელფასი" onChange={setJobPay} value={jobPay} />
+
+               <button className={greenButtoncss.button}>დამატება</button>
+            </div>
          </Modal>
          <div className={css.topbar}>
             <div className={css.search}>
@@ -135,6 +155,31 @@ function JobPost(props) {
                სერვისის შეთავაზება
             </button>
          </div>
+      </div>
+   );
+}
+function ModalRow(props) {
+   const { title, onChange, value, multiRow } = props;
+   return (
+      <div className={css.modalRow}>
+         {multiRow
+            ? [
+                 <div>{title}:</div>,
+                 <textarea
+                    onChange={(e) => onChange(e.target.value)}
+                    value={value}
+                    placeholder={`ჩაწერეთ ${title} აქ...`}
+                 ></textarea>,
+              ]
+            : [
+                 <span>{title}:</span>,
+                 <input
+                    type="text"
+                    onChange={(e) => onChange(e.target.value)}
+                    value={value}
+                    placeholder={`ჩაწერეთ ${title} აქ...`}
+                 />,
+              ]}
       </div>
    );
 }
