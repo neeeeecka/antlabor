@@ -2,8 +2,8 @@
    cursor: pointer;
 
    transition: all 0.15s ease;
-   background: rgb(55, 199, 156);
-   border: 2px solid rgb(55, 199, 156);
+   background: #6f58a2;
+   border: 2px solid #6f58a2;
    color: white;
    padding: 8px;
    font-size: 12px;
@@ -11,11 +11,11 @@
    border-radius: 4px;
    &:hover {
       transition: all 0.15s ease;
-      background: rgb(103, 206, 175);
+      background: #9880ca;
    }
    &:active {
       transition: all 0.15s ease;
-      background: rgb(72, 172, 142);
+      background: #574286;
    }
 
    &:disabled {

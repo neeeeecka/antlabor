@@ -56,25 +56,33 @@ function App() {
 
    const [searchText, setSearchText] = useState("");
 
+   const [canAddJob, setCanAddJob] = useState("");
+
    const addJob = async (e) => {
-      setFetching(true);
-      const { uid } = auth.currentUser;
-      await jobsRef.add({
-         location: "Georgia",
-         title: jobTitle,
-         description: jobDescription,
-         pay: jobPay,
-         user: uid,
-         createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-      });
+      if (jobTitle.length && jobDescription.length && jobPay.length) {
+         setFetching(true);
+         const { uid } = auth.currentUser;
+         await jobsRef.add({
+            location: "Georgia",
+            title: jobTitle,
+            description: jobDescription,
+            pay: jobPay,
+            user: uid,
+            createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+         });
 
-      setJobTitle("");
-      setJobDescription("");
-      setJobPay(0.01);
+         setJobTitle("");
+         setJobDescription("");
+         setJobPay(0.01);
 
-      setVisible(false);
-      setFetching(false);
+         setVisible(false);
+         setFetching(false);
+      }
    };
+   // user.providerData.forEach((profile) => {
+   //    console.log(profile.photoURL);
+   // });
+   // console.log(user.photoURL);
 
    return user ? (
       <div className={css.main}>
@@ -103,7 +111,7 @@ function App() {
                <button
                   className={greenButtoncss.button}
                   onClick={addJob}
-                  disabled={isFetching}
+                  disabled={isFetching && !canAddJob}
                >
                   დამატება
                </button>
@@ -134,7 +142,7 @@ function App() {
                <FontAwesomeIcon icon={faEnvelope} />
             </span>
             <span className={css.li}>
-               <span className={css.profileIcon}></span>
+               <img src={user.photoURL} className={css.profileIcon} />
             </span>
             <span className={css.li} onClick={SignOut}>
                <FontAwesomeIcon icon={faSignOutAlt} />
@@ -148,19 +156,19 @@ function App() {
                      className={greenButtoncss.button}
                      onClick={() => setVisible(true)}
                   >
-                     სამუშაოს შექმნა
+                     ახალი სამუშაოს შექმნა
                   </button>
                </div>
                <div>
                   {jobs &&
                      jobs
-                        .reverse()
                         .filter((job) =>
-                           (job.title + job.description + job.pay).includes(
-                              searchText
-                           )
+                           (job.title + job.description + job.pay)
+                              .toLowerCase()
+                              .includes(searchText.toLowerCase())
                         )
-                        .map((job) => <JobPost key={job.id} job={job} />)}
+                        .map((job) => <JobPost key={job.id} job={job} />)
+                        .reverse()}
                </div>
             </div>
          </div>

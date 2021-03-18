@@ -32,6 +32,7 @@
 }
 .initial {
    opacity: 0;
+   pointer-events: none;
 }
 @keyframes appear {
    0% {

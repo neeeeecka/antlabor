@@ -135,7 +135,7 @@ input {
       }
       &.selected {
          font-weight: bold;
-         border-color: rgb(55, 199, 156);
+         border-color: #a61a77;
          padding-left: 21px;
          color: #1d4354;
       }
@@ -164,13 +164,13 @@ input {
       transition: all 0.15s ease;
       cursor: pointer;
       padding: 15px;
-      background: #b03085;
+      background: #a61a77;
       color: white;
-      border: 2px solid #b03085;
+      border: 2px solid #a61a77;
       border-radius: 8px;
       &:hover {
          transition: all 0.15s ease;
-         background: #bb639e;
+         background: #b64791;
       }
    }
 }
