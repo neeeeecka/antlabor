@@ -59,7 +59,11 @@ function App() {
    // const [canAddJob, setCanAddJob] = useState("");
 
    const addJob = async (e) => {
-      if (jobTitle.length && jobDescription.length && jobPay.length) {
+      if (
+         jobTitle.length > 10 &&
+         jobDescription.length > 10 &&
+         jobPay.length > 0
+      ) {
          setFetching(true);
          const { uid } = auth.currentUser;
          await jobsRef.add({
@@ -69,6 +73,7 @@ function App() {
             pay: jobPay,
             user: uid,
             createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+            userName: user.displayName,
          });
 
          setJobTitle("");
@@ -88,12 +93,14 @@ function App() {
          <Modal visible={visible} onClick={() => setVisible(false)}>
             <div className={css.inModal}>
                <ModalRow
+                  key={0}
                   title="სათაური"
                   onChange={setJobTitle}
                   value={jobTitle}
                   disabled={isFetching}
                />
                <ModalRow
+                  key={1}
                   title="აღწერა"
                   onChange={setJobDescription}
                   value={jobDescription}
@@ -101,6 +108,7 @@ function App() {
                   disabled={isFetching}
                />
                <ModalRow
+                  key={2}
                   title="ხელფასი"
                   onChange={setJobPay}
                   value={jobPay}
@@ -198,10 +206,16 @@ function SignOut() {
 }
 
 function JobPost(props) {
-   const { title, description, pay } = props.job;
+   const { title, description, pay, userName } = props.job;
    return (
       <div className={jobPostcss.jobPost}>
-         <div className={jobPostcss.title}>{title}</div>
+         <div className={jobPostcss.title}>
+            {title} -{" "}
+            <span className={jobPostcss.userName}>
+               <a>{userName}</a>
+               -ს მიერ.
+            </span>
+         </div>
          <div className={jobPostcss.pay}>
             <span>Hourly: ₾{pay}</span> - beginner. 1 - 3 days
          </div>
