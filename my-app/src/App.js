@@ -54,6 +54,8 @@ function App() {
 
    const [isFetching, setFetching] = useState(false);
 
+   const [searchText, setSearchText] = useState("");
+
    const addJob = async (e) => {
       setFetching(true);
       const { uid } = auth.currentUser;
@@ -112,7 +114,12 @@ function App() {
                <span>
                   <FontAwesomeIcon icon={faSearch} />
                </span>
-               <input type="text" placeholder="მოძიება" />
+               <input
+                  type="text"
+                  placeholder="მოძიება (ხელფასით ან სხვა ტექსტით)"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+               />
             </div>
             <span className={css.logo}>
                <img src="logo.png" />
@@ -148,6 +155,11 @@ function App() {
                   {jobs &&
                      jobs
                         .reverse()
+                        .filter((job) =>
+                           (job.title + job.description + job.pay).includes(
+                              searchText
+                           )
+                        )
                         .map((job) => <JobPost key={job.id} job={job} />)}
                </div>
             </div>
