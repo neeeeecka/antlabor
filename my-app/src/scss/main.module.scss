@@ -22,12 +22,14 @@ input {
    }
 }
 .side {
+   overflow: hidden;
    z-index: 1;
    position: relative;
    flex: 1;
    background: white;
    border-radius: 10px;
-   border: 1px solid rgb(197, 197, 197);
+   border: 1px solid #c6c6c6;
+   overflow: auto;
 }
 .topbar {
    background: #1d4354;
@@ -75,7 +77,8 @@ input {
       cursor: pointer;
    }
    .profileIcon {
-      background: url(https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png);
+      //   background: url(https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png);
+      background: gray;
       background-size: cover;
       border-radius: 50%;
       width: 40px;
@@ -117,6 +120,36 @@ input {
       }
       svg {
          margin-right: 6px;
+      }
+   }
+}
+.googleSignIn {
+   display: flex;
+   height: 100vh;
+
+   > div {
+      position: relative;
+      margin: auto;
+      > img {
+         position: absolute;
+         width: 290px;
+         top: -350%;
+         left: 50%;
+         transform: translate(-50%);
+         pointer-events: none;
+      }
+   }
+   button {
+      transition: all 0.15s ease;
+      cursor: pointer;
+      padding: 15px;
+      background: #b03085;
+      color: white;
+      border: 2px solid #b03085;
+      border-radius: 8px;
+      &:hover {
+         transition: all 0.15s ease;
+         background: #bb639e;
       }
    }
 }
