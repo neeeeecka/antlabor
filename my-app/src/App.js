@@ -10,7 +10,7 @@ import {
    faSearch,
    faBell,
    faEnvelope,
-   faQuestion,
+   faCog,
    faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -38,6 +38,10 @@ function App() {
    const [selectedTab, setTab] = useState("ახალი");
    const [user] = useAuthState(auth);
 
+   const jobsRef = firestore.collection("jobs");
+   const query = jobsRef.orderBy("createdAt").limit(25);
+
+   const [jobs] = useCollectionData(query, { idField: "id" });
    return user ? (
       <div className={css.main}>
          <div className={css.topbar}>
@@ -51,7 +55,7 @@ function App() {
                <img src="logo.png" />
             </span>
             <span className={css.li}>
-               <FontAwesomeIcon icon={faQuestion} />
+               <FontAwesomeIcon icon={faCog} />
             </span>
             <span className={css.li}>
                <FontAwesomeIcon icon={faBell} />
@@ -69,11 +73,7 @@ function App() {
          <div className={css.mainFlex}>
             <Navbar selectedTab={selectedTab} onSelect={setTab} />
             <div className={css.side}>
-               <JobPost
-                  title="develop mvp app"
-                  description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                  pay="5"
-               />
+               {jobs && jobs.map((job) => <JobPost key={job.id} job={job} />)}
             </div>
          </div>
       </div>
@@ -103,7 +103,7 @@ function SignOut() {
 }
 
 function JobPost(props) {
-   const { title, description, pay } = props;
+   const { title, description, pay } = props.job;
    return (
       <div className={jobPostcss.jobPost}>
          <div className={jobPostcss.title}>{title}</div>
@@ -111,6 +111,9 @@ function JobPost(props) {
             <span>Hourly: ₾{pay}</span> - beginner. 1 - 3 days
          </div>
          <div className={jobPostcss.description}>{description}</div>
+         <div className={jobPostcss.bottom}>
+            <button>სერვისის შეთავაზება</button>
+         </div>
       </div>
    );
 }

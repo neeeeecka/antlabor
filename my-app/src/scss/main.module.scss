@@ -35,8 +35,11 @@ input {
    background: #1d4354;
    display: flex;
    position: relative;
-   padding: 20px;
+   padding: 25px;
    z-index: 3;
+   margin: 5px;
+
+   border-radius: 10px;
 
    .search {
       background: #2b5468;
@@ -75,16 +78,20 @@ input {
       color: rgba(255, 255, 255, 0.87);
       margin-left: 15px;
       cursor: pointer;
+      display: flex;
+      svg {
+         margin: auto;
+      }
    }
    .profileIcon {
-      //   background: url(https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png);
+      //   background: url("../profile.png");
       background: gray;
       background-size: cover;
       border-radius: 50%;
       width: 40px;
       height: 40px;
       display: inline-block;
-      margin-top: -10px;
+      //   margin-top: -10px;
    }
 }
 .navbar {
