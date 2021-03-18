@@ -56,7 +56,7 @@ function App() {
 
    const [searchText, setSearchText] = useState("");
 
-   const [canAddJob, setCanAddJob] = useState("");
+   // const [canAddJob, setCanAddJob] = useState("");
 
    const addJob = async (e) => {
       if (jobTitle.length && jobDescription.length && jobPay.length) {
@@ -79,10 +79,9 @@ function App() {
          setFetching(false);
       }
    };
-   // user.providerData.forEach((profile) => {
-   //    console.log(profile.photoURL);
-   // });
-   // console.log(user.photoURL);
+
+   let canAddJob =
+      jobTitle.length > 0 && jobDescription.length > 0 && jobPay.length > 0;
 
    return user ? (
       <div className={css.main}>
@@ -111,7 +110,7 @@ function App() {
                <button
                   className={greenButtoncss.button}
                   onClick={addJob}
-                  disabled={isFetching && !canAddJob}
+                  disabled={isFetching || !canAddJob}
                >
                   დამატება
                </button>
